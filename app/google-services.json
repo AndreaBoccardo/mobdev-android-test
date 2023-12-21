@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1035057393452",
+    "project_id": "test-ea523",
+    "storage_bucket": "test-ea523.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035057393452:android:fe507b710940945b22c689",
+        "android_client_info": {
+          "package_name": "cl.mobdev.androidtest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3yWMXiFYAb-MAWhG7PiMB7uWVJxgOWq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
