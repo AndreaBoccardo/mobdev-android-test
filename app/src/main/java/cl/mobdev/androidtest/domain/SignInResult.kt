@@ -1,4 +1,4 @@
-package cl.mobdev.androidtest
+package cl.mobdev.androidtest.domain
 
 import com.google.firebase.auth.AuthResult
 

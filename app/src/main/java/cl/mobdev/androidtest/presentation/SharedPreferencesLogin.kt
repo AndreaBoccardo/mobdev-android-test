@@ -1,4 +1,4 @@
-package cl.mobdev.androidtest
+package cl.mobdev.androidtest.presentation
 
 object SharedPreferencesLogin {
 
@@ -11,5 +11,4 @@ object SharedPreferencesLogin {
     fun fetchAuthToken(): String? {
         return tokenShared
     }
-
 }

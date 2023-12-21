@@ -1,4 +1,4 @@
-package cl.mobdev.androidtest
+package cl.mobdev.androidtest.network
 
 object Constants {
     const val NEW_USER_CODE = "El usuario se ha registrado con éxito"

@@ -1,7 +1,9 @@
-package cl.mobdev.androidtest
+package cl.mobdev.androidtest.network
 
 import android.util.Log
-import cl.mobdev.androidtest.Constants.url_prod
+import cl.mobdev.androidtest.data.remote.model.RemoteSignUpParams
+import cl.mobdev.androidtest.data.remote.model.RemoteSignUpResponse
+import cl.mobdev.androidtest.data.remote.retrofit.ApiWebService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -13,7 +15,7 @@ import java.util.concurrent.TimeUnit
 object Networking {
     fun getRetrofit(): Retrofit {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)
@@ -22,7 +24,7 @@ object Networking {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(url_prod)
+            .baseUrl(Constants.url_prod)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -30,11 +32,11 @@ object Networking {
 
     suspend fun postLoginStatus(token: RemoteSignUpParams): RemoteSignUpResponse {
         runCatching {
-            withContext(Dispatchers.IO){
-                getRetrofit().create(APIService::class.java).signUP("/signUp", token)
+            withContext(Dispatchers.IO) {
+                getRetrofit().create(ApiWebService::class.java).signUP("/signUp", token)
             }
         }.fold(
-            onSuccess = {response ->
+            onSuccess = { response ->
                 Log.d("Endpoint Info", response.code().toString())
                 Log.d("Endpoint Info", response.body()?.messageResponse.orEmpty())
 

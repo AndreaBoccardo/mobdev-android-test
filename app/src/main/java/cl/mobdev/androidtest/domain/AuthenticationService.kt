@@ -1,5 +1,7 @@
-package cl.mobdev.androidtest
+package cl.mobdev.androidtest.domain
 
+import cl.mobdev.androidtest.network.FirebaseClient
+import cl.mobdev.androidtest.presentation.SharedPreferencesLogin
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidUserException

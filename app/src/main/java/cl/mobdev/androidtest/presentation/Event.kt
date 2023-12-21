@@ -1,4 +1,4 @@
-package cl.mobdev.androidtest
+package cl.mobdev.androidtest.presentation
 
 open class Event<out T>(private val content: T) {
 
@@ -17,7 +17,6 @@ open class Event<out T>(private val content: T) {
     fun getContent(): T? {
         return content
     }
-
 
     fun peekContent(): T = content
 }

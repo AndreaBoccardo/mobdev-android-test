@@ -1,10 +1,16 @@
-package cl.mobdev.androidtest
+package cl.mobdev.androidtest.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import cl.mobdev.androidtest.data.remote.model.RemoteSignUpParams
+import cl.mobdev.androidtest.domain.LoginResult
+import cl.mobdev.androidtest.domain.LoginUseCase
+import cl.mobdev.androidtest.navigation.AppScreens
+import cl.mobdev.androidtest.network.Constants
+import cl.mobdev.androidtest.network.Networking
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,14 +47,19 @@ class LoginViewModel @Inject constructor(
         navController: NavController,
         trimmedEmail: String
     ) {
-        if (isValidEmail(email,trimmedEmail ) && isValidPassword(password)) {
+        if (isValidEmail(email, trimmedEmail) && isValidPassword(password)) {
             loginUser(email, password, trimmedEmail, navController)
         } else {
             onFieldsChanged(email, password, trimmedEmail)
         }
     }
 
-    fun loginUser(email: String, password: String, trimmedEmail: String, navController: NavController) {
+    fun loginUser(
+        email: String,
+        password: String,
+        trimmedEmail: String,
+        navController: NavController
+    ) {
         viewModelScope.launch {
             _viewState.value = LoginViewState(isLoading = true)
             when (val result = loginUseCase(email, password)) {
@@ -57,17 +68,20 @@ class LoginViewModel @Inject constructor(
                         UserLogin(email = email, password = password, showErrorDialog = true)
                     _viewState.value = LoginViewState(isLoading = false)
                 }
+
                 is LoginResult.Success -> {
                     setCurrentFirebaseUser(navController)
 
                 }
+
                 is LoginResult.UserNotFound -> {
                     _viewState.value = LoginViewState(
-                        isValidEmail = isValidEmail(email,trimmedEmail),
+                        isValidEmail = isValidEmail(email, trimmedEmail),
                         isValidPassword = isValidPassword(password),
                         userNotExist = true
                     )
                 }
+
                 else -> {}
             }
             _viewState.value = LoginViewState(isLoading = false)
@@ -145,11 +159,13 @@ class LoginViewModel @Inject constructor(
                         navController.navigate(route = AppScreens.HomeScreen.route)
                     }
                 }
+
                 400 -> {
                     _showErrorDialog.value =
                         UserLogin(showErrorDialog = true)
                     _viewState.value = LoginViewState(isLoading = false)
                 }
+
                 500 -> {
                     _showErrorDialog.value =
                         UserLogin(showErrorDialog = true)
@@ -158,5 +174,4 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
-
 }

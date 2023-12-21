@@ -1,4 +1,4 @@
-package cl.mobdev.androidtest
+package cl.mobdev.androidtest.presentation
 
 data class UserLogin(
     val email: String = "",
