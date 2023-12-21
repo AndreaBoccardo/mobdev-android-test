@@ -53,5 +53,6 @@
     <string name="ERROR_MISSING_LOWERCASE">La contraseña debe contener al menos una letra minúscula.</string>
     <string name="ERROR_MISSING_DIGIT">La contraseña debe contener al menos un dígito.</string>
     <string name="ERROR_PASSWORD_MISMATCH">La contraseña y la confirmación de la contraseña no coinciden.</string>
-    <string name="PASSWORD_VALID">La contraseña y la confirmación de la contraseña no coinciden.</string>
+    <string name="password_valid">La contraseña y la confirmación de la contraseña no coinciden.</string>
+    <string name="mail">email</string>
 </resources>

@@ -20,7 +20,7 @@ fun AppNavigation(navHostController: NavHostController = rememberNavController()
                 StartSession(
                     loginViewModel = loginViewModel,
                     navController = navHostController,
-                    onClick = {})
+                )
             }
         }
     }
